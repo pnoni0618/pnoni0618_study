@@ -26,9 +26,9 @@ export default function RootRoute() {
           <Route path="/profile/:userId" element={<ProfileDetailPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
         </Route>
-
         <Route path="*" element={<Navigate to={"/"} />} />
       </Route>
     </Routes>
   );
 }
+//확인2

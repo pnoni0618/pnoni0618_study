@@ -20,6 +20,7 @@ export type Database = {
           content: string
           created_at: string
           id: number
+          parent_comment_id: number | null
           post_id: number
         }
         Insert: {
@@ -27,6 +28,7 @@ export type Database = {
           content?: string
           created_at?: string
           id?: number
+          parent_comment_id?: number | null
           post_id: number
         }
         Update: {
@@ -34,6 +36,7 @@ export type Database = {
           content?: string
           created_at?: string
           id?: number
+          parent_comment_id?: number | null
           post_id?: number
         }
         Relationships: [

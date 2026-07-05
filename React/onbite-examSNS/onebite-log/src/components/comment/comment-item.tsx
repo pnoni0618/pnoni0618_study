@@ -21,9 +21,14 @@ export default function CommentItem(props: Comment) {
     });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isReply, setIsReply] = useState(false);
 
   const toggleIsEditing = () => {
     setIsEditing(!isEditing);
+  };
+
+  const toggleIsReply = () => {
+    setIsReply(!isReply);
   };
 
   const handleDeleteCliek = () => {
@@ -63,7 +68,12 @@ export default function CommentItem(props: Comment) {
 
           <div className="text-muted-foreground flex justify-between text-sm">
             <div className="flex items-center gap-2">
-              <div className="cursor-pointer hover:underline">댓글</div>
+              <div
+                onClick={toggleIsReply}
+                className="cursor-pointer hover:underline"
+              >
+                댓글
+              </div>
               <div className="bg-border h-[13px] w-[2px]"></div>
               <div>{formatTimeAgo(props.created_at)}</div>
             </div>

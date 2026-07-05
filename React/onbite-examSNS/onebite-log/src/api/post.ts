@@ -144,3 +144,6 @@ export async function togglePostLike({
   if (error) throw error;
   return data;
 }
+
+
+// 여기에도 함수 만들어봤어요.

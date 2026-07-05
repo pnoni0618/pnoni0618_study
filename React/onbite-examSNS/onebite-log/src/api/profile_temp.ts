@@ -10,6 +10,8 @@ export async function fetchProfile(userId: string) {
     .eq("id", userId)
     .single();
 
+
+  // 소스수정했으니까 더이상 토달지마
   if (error) throw error;
   return data;
 }

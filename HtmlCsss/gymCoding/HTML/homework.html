@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>시맨틱 태그 예시 페이지</title>
+    <style>
+      body {
+        font-family: 'Pretendard', sans-serif;
+        margin: 0;
+        line-height: 1.6;
+      }
+      header,
+      footer {
+        background: #f3f3f3;
+        padding: 20px;
+      }
+      nav a {
+        margin-right: 15px;
+        text-decoration: none;
+        color: #333;
+      }
+      main {
+        display: flex;
+        padding: 20px;
+      }
+      article {
+        flex: 3;
+        margin-right: 20px;
+      }
+      aside {
+        flex: 1;
+        background: #fafafa;
+        padding: 15px;
+        border-left: 1px solid #ddd;
+      }
+      section {
+        margin-bottom: 30px;
+      }
+      figure {
+        text-align: center;
+      }
+      figcaption {
+        font-size: 0.9em;
+        color: #555;
+      }
+      footer p {
+        margin: 5px 0;
+        text-align: center;
+      }
+      mark {
+        background-color: #fffd75;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 상단 영역 -->
+    <header>
+      <h1>Seulki의 HTML 학습 블로그</h1>
+      <nav>
+        <a href="#">홈</a>
+        <a href="#">HTML</a>
+        <a href="#">CSS</a>
+        <a href="#">JavaScript</a>
+        <a href="#">문의</a>
+      </nav>
+    </header>
+
+    <!-- 주요 콘텐츠 -->
+    <main>
+      <article>
+        <section>
+          <h2>HTML 시맨틱 태그란?</h2>
+          <p>
+            <mark>시맨틱 태그(Semantic Tag)</mark>는 태그 이름만 봐도 그 의미와
+            역할을 알 수 있는 태그를 말합니다. 예를 들어,
+            <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>,
+            <code>&lt;footer&gt;</code> 등이 있습니다.
+          </p>
+        </section>
+
+        <section>
+          <h2>이미지와 설명</h2>
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/8/80/HTML5_logo_resized.svg"
+              alt="HTML5 로고"
+              width="120"
+            />
+            <figcaption>그림 1. HTML5 공식 로고</figcaption>
+          </figure>
+        </section>
+
+        <section>
+          <h2>자세히 보기</h2>
+          <details>
+            <summary>시맨틱 태그를 사용하는 이유</summary>
+            <p>
+              검색엔진이 콘텐츠 구조를 이해하기 쉬워지고,
+              접근성(Accessibility)이 향상됩니다.
+            </p>
+          </details>
+        </section>
+
+        <footer>
+          <p>작성자: 이슬기</p>
+          <p>작성일: <time datetime="2025-11-09">2025년 11월 9일</time></p>
+        </footer>
+      </article>
+
+      <!-- 사이드바 -->
+      <aside>
+        <h3>관련 글</h3>
+        <ul>
+          <li><a href="#">HTML 기본 구조</a></li>
+          <li><a href="#">시맨틱 태그란?</a></li>
+          <li><a href="#">CSS로 예쁘게 꾸미기</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <!-- 하단 영역 -->
+    <footer>
+      <p>© 2025 Seulki Lee. All rights reserved.</p>
+      <p>문의: <a href="mailto:contact@example.com">contact@example.com</a></p>
+    </footer>
+  </body>
+</html>

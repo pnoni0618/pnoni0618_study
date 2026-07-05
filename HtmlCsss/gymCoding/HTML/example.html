@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Data Viewer – name=value</title>
+    <style>
+      body {
+        font-family: Pretendard, sans-serif;
+        line-height: 1.6;
+        padding: 30px;
+      }
+      select,
+      button {
+        padding: 6px 10px;
+        font-size: 1rem;
+      }
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #1a73e8;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Please select your favorite fruit 🍓</h2>
+
+    <form id="fruitForm">
+      <label for="fruits">Favorite Fruit:</label>
+      <select id="fruits" name="fruits">
+        <option value="">-- Please choose an option --</option>
+        <option value="apple">Apple 🍎</option>
+        <option value="banana">Banana 🍌</option>
+        <option value="orange">Orange 🍊</option>
+        <option value="peach">Peach 🍑</option>
+        <option value="grape">Grape 🍇</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+      const form = document.getElementById('fruitForm');
+      const result = document.getElementById('result');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); // 실제 서버 전송 막기
+        const formData = new FormData(form);
+        const entries = Array.from(formData.entries());
+        let output = '';
+        entries.forEach(([key, value]) => {
+          output += `${key} = ${value}`;
+        });
+        result.textContent = output || 'No fruit selected 🍂';
+      });
+    </script>
+  </body>
+</html>

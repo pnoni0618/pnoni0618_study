@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <fieldset>
+        <legend>Input Tag</legend>
+        <ul>
+          <li>
+            <label for="text">Text</label>
+            <input type="text" id="text" value="이름을 입력하세요" readonly />
+          </li>
+          <li>
+            <label for="email">이메일</label>
+            <input type="email" id="email" required value="Hello" disabled />
+          </li>
+          <li>
+            <label for="tel">전화번호</label>
+            <input type="tel" id="tel" required autofocus />
+          </li>
+          <li>
+            <label for="url">url</label>
+            <input
+              type="url"
+              id="url"
+              required
+              placeholder="url을 입력해주세요"
+            />
+          </li>
+          <li>
+            <label for="number">Number</label>
+            <input type="number" id="number" required min="5" max="10" />
+          </li>
+          <li>
+            <label for="range">range</label>
+            <input type="range" id="range" required />
+          </li>
+          <li>
+            <label for="password">password</label>
+            <input type="password" id="password" required />
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <ul>
+          <li>
+            <label for="date">date</label>
+            <input type="date" id="date" min="2025-10-1" max="2025-10-31" />
+          </li>
+          <li>
+            <label for="week">week</label>
+            <input type="week" id="week" />
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <ul>
+          <li>
+            <label for="time">time</label>
+            <input type="time" id="time" min="14:00" max="19:00" />
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend>그 외</legend>
+        <ul>
+          <li>
+            <input type="file" multiple />
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <input type="hidden" name="" value="" />
+          </li>
+        </ul>
+      </fieldset>
+      <!--유효성 체크-->
+      <input type="submit" value="제출하기" />
+    </form>
+  </body>
+</html>

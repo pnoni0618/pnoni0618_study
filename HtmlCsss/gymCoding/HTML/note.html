@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>background-attachment 비교 예제</title>
+    <style>
+      body {
+        font-family: Pretendard, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      h1 {
+        text-align: center;
+        padding: 20px;
+        background: #222;
+        color: #fff;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+        padding: 40px;
+      }
+
+      .box {
+        width: 80%;
+        height: 300px;
+        color: white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        overflow: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        background-size: cover;
+        background-position: center;
+        border: 3px solid rgba(255, 255, 255, 0.4);
+      }
+
+      /* 1️⃣ scroll */
+      .scroll-box {
+        background-image: url('https://picsum.photos/id/1015/800/600');
+        background-attachment: scroll;
+      }
+
+      /* 2️⃣ fixed */
+      .fixed-box {
+        background-image: url('https://picsum.photos/id/1005/800/600');
+        background-attachment: fixed;
+      }
+
+      /* 3️⃣ local */
+      .local-box {
+        background-image: url('https://picsum.photos/id/1011/800/600');
+        background-attachment: local;
+      }
+
+      p {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>background-attachment 비교 👇</h1>
+
+    <div class="container">
+      <div class="box scroll-box">
+        <p>🎨 background-attachment: <b>scroll</b> (기본값)</p>
+        <p>
+          이 박스의 배경은 페이지 스크롤 시 같이 움직입니다.<br />
+          내부 스크롤을 내려도 배경은 고정된 위치에 보입니다.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+          rhoncus lorem sit amet nisi porta, in ultricies justo tempus.
+          Suspendisse malesuada, sem vel laoreet feugiat, nisl nisl facilisis
+          risus, ac finibus erat augue id justo. (스크롤해보세요 ↓)
+        </p>
+      </div>
+
+      <div class="box fixed-box">
+        <p>📌 background-attachment: <b>fixed</b></p>
+        <p>
+          이 박스의 배경은 **브라우저 화면에 고정**되어 있습니다.<br />
+          페이지를 스크롤해도 배경이 움직이지 않아요.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+          rhoncus lorem sit amet nisi porta, in ultricies justo tempus.
+          Suspendisse malesuada, sem vel laoreet feugiat, nisl nisl facilisis
+          risus, ac finibus erat augue id justo. (스크롤해보세요 ↓)
+        </p>
+      </div>
+
+      <div class="box local-box">
+        <p>🌀 background-attachment: <b>local</b></p>
+        <p>
+          이 박스는 내부 스크롤 시 **배경도 함께 스크롤**됩니다.<br />
+          콘텐츠와 배경이 같이 움직이는 것을 볼 수 있습니다.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+          rhoncus lorem sit amet nisi porta, in ultricies justo tempus.
+          Suspendisse malesuada, sem vel laoreet feugiat, nisl nisl facilisis
+          risus, ac finibus erat augue id justo. (스크롤해보세요 ↓)
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

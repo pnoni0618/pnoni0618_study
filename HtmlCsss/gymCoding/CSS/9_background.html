@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background</title>
+    <style>
+      .red {
+        background-color: red;
+        width: 120px;
+        height: 120px;
+      }
+
+      .image {
+        background-image: url(../assets/images/size-img2.png);
+        width: 200px;
+        height: 400px;
+        border: 1px solid black;
+        background-repeat: repeat;
+        background-position: top right;
+        display: inline-block;
+        overflow-y: scroll;
+      }
+
+      .attachment-scroll {
+        background-attachment: scroll;
+      }
+      .attachment-scroll {
+        background-attachment: fixed;
+      }
+      .attachment-scroll {
+        background-attachment: local;
+      }
+
+      .background-size {
+        width: 300px;
+        height: 300px;
+        background-image: url('../assets/images/size-img3.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border: 1px solid black;
+      }
+
+      .linear-gradient {
+        width: 500px;
+        height: 200px;
+        border: 1px solid red;
+        background: linear-gradient(
+          to right,
+          rgb(212, 140, 140) 50%,
+          rgb(126, 126, 199),
+          yellow
+        );
+      }
+
+      .radial-gradient {
+        width: 500px;
+        height: 200px;
+        border: 1px solid blue;
+        background: radial-gradient(circle at 15%, white, yellow, blue);
+      }
+    </style>
+  </head>
+  <body>
+    <h3>background-color</h3>
+    <div class="red"></div>
+
+    <h3>background-image</h3>
+    <div class="image attachment-scroll">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore labore
+      sunt laudantium ut quidem iusto neque quibusdam, numquam excepturi, at
+      sit, provident placeat recusandae nihil architecto ipsum molestias! Rerum,
+      quae. Ipsum veniam molestias quam ipsam doloremque quas id asperiores,
+      perspiciatis cumque quisquam dignissimos ea magnam obcaecati repellendus
+      repudiandae quidem, ratione repellat suscipit laudantium quae? Corrupti
+      accusantium cupiditate alias sunt ad. Est aperiam quis nesciunt, cumque
+      temporibus quia reiciendis, autem aut culpa consequatur repellendus quos
+      perferendis ullam architecto non quidem neque corporis provident? Unde
+      veniam impedit, doloremque corrupti nobis nihil sed! Suscipit, iusto vitae
+      aliquid vero voluptates mollitia enim nostrum, voluptatem dicta obcaecati
+      maxime ipsa. Maxime libero ipsum quos sit distinctio, architecto, corporis
+      exercitationem eveniet atque, harum ut esse velit aspernatur? Molestias
+      eum ducimus recusandae quo id quod sint, reprehenderit quas perspiciatis
+      similique, at ad ipsum. Vitae assumenda deserunt illum consequuntur
+      corporis repellat cupiditate? Animi exercitationem consectetur corporis
+      velit aliquid cupiditate. Quos nihil, quam tempore expedita odit itaque
+      facere, rerum aut dolore quo provident ea ipsam deserunt nostrum amet.
+      Exercitationem sequi inventore ab ipsa dignissimos doloribus debitis
+      molestias sunt. Cum, iste. Accusantium quod dolorem, laborum soluta est
+      odit obcaecati! In, tenetur quas. Odio tempore magnam minima ab. Ab eaque
+      illo eligendi ut cumque numquam laudantium. Voluptates culpa sunt modi
+      magnam harum. Excepturi omnis hic impedit amet nulla iusto, in placeat at
+      facere repellendus qui itaque aut commodi perferendis rerum repellat illo
+      vero eaque nemo debitis officia saepe adipisci odit odio? Ipsa.
+    </div>
+    <div class="image attachment-fixed">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore labore
+      sunt laudantium ut quidem iusto neque quibusdam, numquam excepturi, at
+      sit, provident placeat recusandae nihil architecto ipsum molestias! Rerum,
+      quae. Ipsum veniam molestias quam ipsam doloremque quas id asperiores,
+      perspiciatis cumque quisquam dignissimos ea magnam obcaecati repellendus
+      repudiandae quidem, ratione repellat suscipit laudantium quae? Corrupti
+      accusantium cupiditate alias sunt ad. Est aperiam quis nesciunt, cumque
+      temporibus quia reiciendis, autem aut culpa consequatur repellendus quos
+      perferendis ullam architecto non quidem neque corporis provident? Unde
+      veniam impedit, doloremque corrupti nobis nihil sed! Suscipit, iusto vitae
+      aliquid vero voluptates mollitia enim nostrum, voluptatem dicta obcaecati
+      maxime ipsa. Maxime libero ipsum quos sit distinctio, architecto, corporis
+      exercitationem eveniet atque, harum ut esse velit aspernatur? Molestias
+      eum ducimus recusandae quo id quod sint, reprehenderit quas perspiciatis
+      similique, at ad ipsum. Vitae assumenda deserunt illum consequuntur
+      corporis repellat cupiditate? Animi exercitationem consectetur corporis
+      velit aliquid cupiditate. Quos nihil, quam tempore expedita odit itaque
+      facere, rerum aut dolore quo provident ea ipsam deserunt nostrum amet.
+      Exercitationem sequi inventore ab ipsa dignissimos doloribus debitis
+      molestias sunt. Cum, iste. Accusantium quod dolorem, laborum soluta est
+      odit obcaecati! In, tenetur quas. Odio tempore magnam minima ab. Ab eaque
+      illo eligendi ut cumque numquam laudantium. Voluptates culpa sunt modi
+      magnam harum. Excepturi omnis hic impedit amet nulla iusto, in placeat at
+      facere repellendus qui itaque aut commodi perferendis rerum repellat illo
+      vero eaque nemo debitis officia saepe adipisci odit odio? Ipsa.
+    </div>
+    <div class="image attachment-local">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore labore
+      sunt laudantium ut quidem iusto neque quibusdam, numquam excepturi, at
+      sit, provident placeat recusandae nihil architecto ipsum molestias! Rerum,
+      quae. Ipsum veniam molestias quam ipsam doloremque quas id asperiores,
+      perspiciatis cumque quisquam dignissimos ea magnam obcaecati repellendus
+      repudiandae quidem, ratione repellat suscipit laudantium quae? Corrupti
+      accusantium cupiditate alias sunt ad. Est aperiam quis nesciunt, cumque
+      temporibus quia reiciendis, autem aut culpa consequatur repellendus quos
+      perferendis ullam architecto non quidem neque corporis provident? Unde
+      veniam impedit, doloremque corrupti nobis nihil sed! Suscipit, iusto vitae
+      aliquid vero voluptates mollitia enim nostrum, voluptatem dicta obcaecati
+      maxime ipsa. Maxime libero ipsum quos sit distinctio, architecto, corporis
+      exercitationem eveniet atque, harum ut esse velit aspernatur? Molestias
+      eum ducimus recusandae quo id quod sint, reprehenderit quas perspiciatis
+      similique, at ad ipsum. Vitae assumenda deserunt illum consequuntur
+      corporis repellat cupiditate? Animi exercitationem consectetur corporis
+      velit aliquid cupiditate. Quos nihil, quam tempore expedita odit itaque
+      facere, rerum aut dolore quo provident ea ipsam deserunt nostrum amet.
+      Exercitationem sequi inventore ab ipsa dignissimos doloribus debitis
+      molestias sunt. Cum, iste. Accusantium quod dolorem, laborum soluta est
+      odit obcaecati! In, tenetur quas. Odio tempore magnam minima ab. Ab eaque
+      illo eligendi ut cumque numquam laudantium. Voluptates culpa sunt modi
+      magnam harum. Excepturi omnis hic impedit amet nulla iusto, in placeat at
+      facere repellendus qui itaque aut commodi perferendis rerum repellat illo
+      vero eaque nemo debitis officia saepe adipisci odit odio? Ipsa.
+    </div>
+    <h3>background-size</h3>
+    <div class="background-size"></div>
+    <h3>linear-gradient</h3>
+    <div class="linear-gradient"></div>
+    <h3>radial-gradient</h3>
+    <div class="radial-gradient"></div>
+    <div style="height: 1000px; width: 10px; background-color: red"></div>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>구구단 업그레이드</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container-gugudan {
+        border: 2px solid rgb(60, 130, 236);
+        display: flex;
+        flex-wrap: wrap; /* 줄바꿈 허용 */
+        width: 650px;
+        padding: 10px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+      }
+
+      .gugu-box {
+        border: 1px solid blue;
+        padding: 10px;
+        margin: 10px;
+        width: 160px;
+        box-sizing: border-box;
+        background-color: #f9f9ff;
+        border-radius: 6px;
+      }
+
+      .gugu-box h3 {
+        margin-top: 0;
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #003399;
+        text-align: center;
+      }
+
+      .gugu-box p {
+        border: 1px solid orange;
+        padding: 2px 6px;
+        margin: 2px 0;
+        background-color: #fffdfa;
+        border-radius: 3px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="center">
+      <article class="container-gugudan"></article>
+    </main>
+
+    <script>
+      // 구구단을 표시할 article 요소 선택
+      const containerGugudan = document.querySelector('.container-gugudan');
+
+      // 1단부터 9단까지
+      for (let i = 1; i <= 9; i++) {
+        // 각 단을 담을 박스 div 생성
+        const divTag = document.createElement('div');
+        divTag.classList.add('gugu-box'); // 클래스 추가 (스타일링용)
+
+        // 각 단의 제목 생성 (예: "1단", "2단")
+        const title = document.createElement('h3');
+        title.textContent = `${i}단`;
+        divTag.append(title);
+
+        // 각 단의 계산 결과 추가
+        for (let j = 1; j <= 9; j++) {
+          const pTag = document.createElement('p');
+          pTag.textContent = `${i} × ${j} = ${i * j}`;
+          divTag.append(pTag);
+        }
+
+        // 완성된 단(div)을 article 안에 추가
+        containerGugudan.append(divTag);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>배열 만들고 출력하기</title>
+  </head>
+  <body>
+    <div id="output"></div>
+    <script>
+      let arr = new Array(); // arr = []와 같음
+      let sum = 0;
+
+      arr[0] = 23;
+      arr[1] = 12;
+      arr[2] = 34;
+
+      const output = document.getElementById('output');
+      output.innerHTML = ''; //초기화
+
+      for (let i = 0; i < arr.length; i++) {
+        output.innerHTML += `arr[${i}] = ${arr[i]} <br>`;
+        sum += arr[i];
+      }
+
+      output.innerHTML += `<hr>배열을 더한 값은 ${sum}`;
+    </script>
+  </body>
+</html>

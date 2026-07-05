@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      .container-gugudan {
+        border: 1px solid red;
+        display: flex;
+        width: 600px;
+        flex-wrap: wrap; /* 줄바꿈 허용 */
+      }
+      .container-gugudan > div {
+        border: 1px solid blue;
+        padding: 10px;
+        margin: 10px;
+      }
+      .container-gugudan > div > p {
+        border: 1px solid orange;
+      }
+    </style>
+  </head>
+
+  <body>
+    <article class="container-gugudan"></article>
+  </body>
+
+  <script>
+    const containerGugudan = document.querySelector('.container-gugudan');
+    for (let i = 1; i < 10; i++) {
+      const divTag = document.createElement('div');
+      for (let j = 1; j < 10; j++) {
+        const pTag = document.createElement('p');
+        pTag.innerHTML = i + ' X ' + j + ' = ' + i * j;
+        divTag.append(pTag);
+      }
+      containerGugudan.append(divTag);
+    }
+  </script>
+</html>

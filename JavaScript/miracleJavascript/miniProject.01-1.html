@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보 게임</title>
+  </head>
+  <body>
+    <h1>가위바위보 게임을 시작합니다</h1>
+
+    <button onclick="rcpGame()">게임시작</button>
+
+    <div id="userImg"></div>
+    <div id="comImg"></div>
+    <div id="result"></div>
+
+    <script>
+      function rcpGame() {
+        const user = parseInt(prompt('바위=0, 가위=1, 보=2 중 입력하세요'));
+        const userImg = document.getElementById('userImg');
+        userImg.innerHTML = `<img src="./img/rcp${user}.png">`;
+
+        const com = Math.floor(Math.random() * 3);
+        const comImg = document.getElementById('comImg');
+        comImg.innerHTML = `<img src="./img/rcp${com}.png">`;
+
+        const result = document.getElementById('result');
+
+        let message = '';
+
+        if (user == com) {
+          message = '비겼습니다';
+        } else if (user == 0 && com == 1) {
+          message = '당신이 이겼습니다';
+        } else if (user == 1 && com == 2) {
+          message = '당신이 이겼습니다';
+        } else if (user == 2 && com == 0) {
+          message = '당신이 이겼습니다';
+        } else {
+          message = '당신이 졌습니다';
+        }
+        result.innerHTML = `<h3>${message}</h3>`;
+      }
+    </script>
+  </body>
+</html>

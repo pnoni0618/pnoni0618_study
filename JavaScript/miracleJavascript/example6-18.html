@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>버튼으로 매개변수 전달하기</title>
+    <style>
+      .button {
+        margin: 2px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="alter">Change Color</h1>
+    <button class="button" onclick="change('red')">red</button>
+    <button class="button" onclick="change('blue')">blue</button>
+    <button class="button" onclick="change('yellow')">yellow</button>
+    <button class="button" onclick="change('#A4FDF0FF')">
+      승환이가 좋아하는 색깔
+    </button>
+    <script>
+      function change(colors) {
+        const alter = document.getElementById('alter');
+        alter.style.color = colors;
+      }
+    </script>
+  </body>
+</html>

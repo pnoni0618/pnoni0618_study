@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      .container-rpc {
+        border: 1px solid red;
+        display: flex;
+
+        flex-wrap: wrap; /* 줄바꿈 허용 */
+        justify-content: space-between; /* 양끝 배치 */
+      }
+
+      .container-rpc > div {
+        border: 1px solid blue;
+        padding: 10px;
+        margin: 10px;
+        height: 300px;
+        width: 200px;
+        display: flex;
+        flex-direction: column; /* 자식 요소들을 세로로 배치 */
+      }
+
+      .container-rpc > div > #myRpcImg,
+      #youRpcImg {
+        /* border: 1px solid blue; */
+        width: 100px;
+        margin-top: auto; /* 아래쪽으로 밀어내기 */
+      }
+      .container-rpc img {
+        width: 100px;
+      }
+
+      #resultP {
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-rpc">
+      <div>
+        <h1>나</h1>
+        <p>
+          <input type="radio" name="rpc" id="scissors" value="0" />
+          <label for="scissors">가위</label>
+          <input type="radio" name="rpc" id="rock" value="1" />
+          <label for="rock">바위</label>
+          <input type="radio" name="rpc" id="paper" value="2" />
+          <label for="paper">보</label>
+        </p>
+        <hr />
+        <button id="gogosingButton">고고싱</button>
+        <div id="myRpcImg"></div>
+      </div>
+      <div>
+        <h1>상대방</h1>
+        <div id="youRpcImg"></div>
+      </div>
+    </div>
+    <p id="resultP"></p>
+  </body>
+
+  <script>
+    const imageObject = {
+      0: 'https://thumb.silhouette-ac.com/t/a7/a7c3020b4cfb4fd154c4fcfd62702df2_t.jpeg', // 가위
+      1: 'https://thumb.silhouette-ac.com/t/69/69ffced83032519ca680dc3058b9ca26_t.jpeg', // 바위
+      2: 'https://thumb.silhouette-ac.com/t/ac/ace4c56ba1582e3a3c6ed4a3b20ec7a9_t.jpeg', // 보
+    };
+
+    const gogosingHamsoo = () => {
+      const checkedRadio = document.querySelector('input[name="rpc"]:checked');
+      if (!checkedRadio) {
+        alert('무엇을 낼지 선택은 하거라..');
+        return false;
+      }
+      console.log(checkedRadio);
+
+      // 나
+      const myResult = Number(checkedRadio.value);
+
+      console.log(typeof myResult);
+
+      document.getElementById(
+        'myRpcImg'
+      ).innerHTML = `<img src=${imageObject[myResult]} />`;
+
+      // 상대방
+
+      // 이런방법도 있고?ㅋㅋㅋ
+      const timeStamp = new Date().getTime();
+      const yourResult = timeStamp % 3;
+
+      // 이런방법도 있다
+      // const yourResult = Math.floor(Math.random() * 3);
+
+      console.log(yourResult);
+
+      document.getElementById(
+        'youRpcImg'
+      ).innerHTML = `<img src=${imageObject[yourResult]} />`;
+
+      // 결과 출력
+      const resultP = document.getElementById('resultP');
+      // console.log(myResult, yourResult);
+      if (myResult === yourResult) {
+        resultP.textContent = '비겼습니다.';
+      } else {
+        if (myResult === 0) {
+          resultP.textContent =
+            yourResult === 2 ? '이겼습니다.' : '개발렸습니다.';
+        } else if (myResult === 1) {
+          resultP.textContent =
+            yourResult === 0 ? '이겼습니다.' : '개발렸습니다.';
+        } else if (myResult === 2) {
+          resultP.textContent =
+            yourResult === 0 ? '개발렸습니다' : '이겼습니다.';
+        }
+      }
+    };
+
+    const gogosingButton = document.getElementById('gogosingButton');
+    gogosingButton.addEventListener('click', gogosingHamsoo);
+  </script>
+</html>

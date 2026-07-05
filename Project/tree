@@ -1,0 +1,136 @@
+A) HTML DOM 트리 (화면 구조)
+body
+├ h1 "프로그램 선택"
+├ div #program-list (프로그램 버튼 영역)
+│ ├ button[data-program="physical"] "피지컬:아시아"
+│ └ button[data-program="iAmSolo"] "나는, 솔로"
+│
+├ h2 #board-title (현재 게시판 제목)
+├ div #post-list (글 목록이 들어갈 영역)
+│ ├ div (글 1개 카드) <-JS가 createElement로만들어서 appendChild로 붙임
+│ ├ div (글 1개 카드)
+│ └ ...
+│
+├ button #write-btn "글쓰기
+└ div #write-form (글쓰기 폼, 기본 숨김)
+   ├ input #write-title
+   ├ textarea #write-content
+   ├ button(등록) onclick="submitPost()"
+   └ button(취소) onclick="cancelWrite()"
+
+#board-title 처럼 #붙은 건 id
+data-program="physical" -> data-속성(attribute)
+(JS에서 btn.dataset.program으로 읽음)
+
+
+B) JS 데이터 트리 (boards 구조)
+
+boards (변수명 /객체)
+├ physical (속성명 / key) : Array(배열)
+│ ├ post (객체) 
+│ │ ├ id : number
+│ │ ├ title : string
+│ │ └ content : string
+│ └ post (객체)
+│    ├ id : number
+│    ├ title : string
+│    └ content : string
+│
+└  iAmSolo (속성명 / key) : Array (배열)
+   └ post (객체)
+      ├ id : number
+      ├ title : string
+      └ content : string
+
+boards -> 변수명
+physical, iAmSolo -> 속성명 (key)
+배열 안의 {...} -> 게시글 객체
+id / title /  content -> 속성명 (property)
+
+
+C) JS 상태+ 로직 트리 (흐름 구조)
+
+1) 상태(State) 변수들
+currentProgram : physical 또는 iAmSolo
+isEditMode : true / false
+editingPostId : number 또는 null
+
+2) DOM 참조 변수들 (HTML 요소를 잡아둔 변수)
+programButtons = document.querySelectorAll("#program-list button")
+boardTitle = document.getElementById("board-title")
+postList = document.getElementById("post-list")
+writeBtn = document.getElementById("write-btn")
+writeForm = document.getElementById("write-form")
+writeTitleInput = document.getElementById("write-title")
+wirteContentInput = document.getElementById("wirte-content")
+
+변수명 모음이고, 오른쪽은 DOM을 가져오는 함수 호출 결과야 
+
+
+3) 함수 목록 (함수명 + 역할)
+renderBoard() : 현재 상태 (currentProgram)에 맞는 글 목록을 화면에 그리기(렌더)
+handleWirte() : 글쓰기 폼 열기 + 수정모드 해제
+submitPost() : 새 글 등록 또는 수정 저장 처리
+cancelWrite() : 글쓰기 폼 닫기 + 상태 초기와
+deletePost(id) : 특정 글 삭제
+editPost(id) : 수정모드 시작 + 폼에 기존 글 채우기
+saveBoards() : boards를 localStorage에 저장 
+
+
+4) 이벤트 (사용자 행동 -> 함수 호출) 연결 구조
+(1) 글쓰기 버튼 클릭
+writeBtn 클릭
+-> handleWrite()
+-> writeForm 보이기
+
+(2) 프로그램 버튼 클릭(피지컬 / 나는 솔로)
+programButtons 각각 클릭
+-> currentProgra = btn.dataset.program (상태 변경)
+-> calselWrite() (폼 닫기 / 상태 정리)
+-> renderBoard() (다시 그리기)
+
+(3) 글 목록의 수정 / 삭제 버튼
+<button onclick="editPost(글id)">수정</button>
+<button onclick="deletPost(글id)">삭제</button>
+
+D) "이름표" 한 번에 정리표
+(1) id
+program-list
+board-title
+post-list
+write-btn
+write-form
+write-title
+write-content
+
+(2) 변수명
+boards
+programNames
+currentProgram
+isEditMode
+deitingPostId
+programButtons
+boardTitle
+postList
+writeBtn
+writeForm
+writeTitleInput
+wirteContentInput
+
+(3) 함수명
+renderBoard
+handleWrite
+submitPost
+cancelWrite
+deletePost
+editPost
+saveBoards
+
+(4) 속성명 (객체 안의 key / property)
+boards.physical
+boards.iAmSolo
+게시글 속성 : post.id, post.title, post.content
+프로그램 이름표: programNames.physical, programNames.iAmSolo
+
+(5) 매개변수 
+deletePost()

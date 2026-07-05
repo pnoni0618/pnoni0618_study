@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function makeFood(num) {
+        if (num >= 1 && num <= 3) {
+          document.write("<img src='./img/food" + num + ".png'>");
+          return true;
+        } else return false;
+      }
+
+      const food = parseInt(prompt('햄버거=1, 피자=2, 감자튀김=3'));
+      const result = makeFood(food);
+      if (result) document.write('<hr>식사 맛있게 하세요');
+      else document.write('없는 메뉴입니다. ');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>객체의 메서드 사용하기</title>
+  </head>
+  <body>
+    <script>
+      let a1 = [0, 1, 2, 3, 4];
+      let a2 = new Array(9, 8, 7, 6, 5);
+      document.write(`a1 = [${a1}]<br>`);
+      document.write(`a2 = [${a2}]<hr>`);
+
+      document.write(`a1.concat(a2) : ${a1.concat(a2)}<hr>`);
+
+      function gt(e) {
+        return e >= 7;
+      }
+
+      document.write(`a2.filter(gt) : ${a2.filter(gt)}<hr>`);
+      document.write(`a2.indexOf(6) : ${a2.indexOf(6)}<hr>`); // 뒤에서부터 6번째
+
+      a2.push(4);
+      document.write(`a2.push(4) : ${a2}<hr>`); // a2 배열 맨 끝에 4 추가
+
+      a2.pop();
+      document.write(`a2.pop() : ${a2}<hr>`); //맨 뒤에 요소 삭제
+      document.write(`a1.reverse() : ${a1.reverse()}<hr>`); // 배열 요소 순서 거꾸로
+
+      a2.shift();
+      document.write(`a2.shift() : ${a2}<hr>`); // 맨 앞 요소 삭제
+
+      a2.unshift(9);
+      document.write(`a2.unshift(9) : ${a2}<hr>`); // 배열 맨 앞에 요소 추가
+      document.write(`a2.slice(1, 4) : ${a2.slice(1, 4)}<hr>`); // 인덱스 1부터 4 이전까지 반환
+      document.write(`a2.sort() : ${a2.sort()} <hr>`); // 모든 요소를 정렬함
+      document.write(`a2.join("+") : ${a2.join('+')}`); // 모든 요소에 합친 문자열 반환
+    </script>
+  </body>
+</html>

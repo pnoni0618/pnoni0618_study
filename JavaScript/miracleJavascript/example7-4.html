@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>String 객체의 메서드 사용하기</title>
+  </head>
+  <body>
+    <script>
+      const s1 = new String('Web');
+      const s2 = 'Programming';
+      document.write(`s1 = "${s1}" <br>`);
+      document.write(`s2 = "${s2}" <hr>`);
+
+      document.write(`s1.charAt(0)  : ${s1.charAt(0)}<hr>`); // i번째 인덱스 문자 반환
+      document.write(`s1.concat(s2)  : ${s1.concat(s2)}<hr>`); // 문자열 합침
+      document.write(`s2.indexOf("i")  : ${s2.indexOf('i')}<hr>`); // i의 인덱스 반환
+      document.write(`s2.replace("m", "M")  : ${s2.replace('m', 'M')}<hr>`); // m을 M으로 변경
+      document.write(`s2.search("m")  : ${s2.search('m')}<hr>`); // indexOf처럼 위치를 찾아 반환하지만, 시작 위치를 지정할 수 없다는 점이 다름
+      document.write(`s2.split("a")  : ${s2.split('a')}<hr>`); // a를 분리자로 하여 문자열을 분리하고 반환함
+      document.write(`s2.substr(0, 4)  : ${s2.substr(0, 4)}<hr>`); // 0번째 인덱스부터 4개만큼의 문자열을 배열로 반환
+      document.write(`s2.slice(3, -1)  : ${s2.slice(3, -1)}<hr>`); // 3번부터 음수인덱스 -1을 제외한 문자열 반환
+      document.write(`s2.toLowerCase()  : ${s2.toLowerCase()}<hr>`); // 소문자로 변환
+      document.write(`s2.toUpperCase()  : ${s2.toUpperCase()}<hr>`); // 대문자로 반환
+      document.write(`s1.trim()  : +${s1.trim()}<hr>`); // 양 끝에 공백문자열을 빼고 반환
+    </script>
+  </body>
+</html>

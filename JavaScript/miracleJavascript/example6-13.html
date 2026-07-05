@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>다중 반본문으로 구구단 출력하기</title>
+  </head>
+  <body>
+    <script>
+      let dan, num;
+      for (dan = 2; dan < 10; dan++) {
+        document.write(dan + '단: ');
+        for (num = 1; num < 10; num++) {
+          if (num == 5) continue;
+          document.write(dan + 'X' + num + '=' + dan * num + ' ');
+        }
+        document.write('<hr>');
+      }
+    </script>
+  </body>
+</html>

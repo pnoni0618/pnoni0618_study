@@ -1,0 +1,30 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "content": "할 일 1",
+      "isDone": true
+    },
+    {
+      "id": "2",
+      "content": "할 일 2",
+      "isDone": true
+    },
+    {
+      "id": "3",
+      "content": "할 일 3",
+      "isDone": false
+    },
+    {
+      "content": "123",
+      "isDone": false,
+      "id": "mXE-jobH1-w"
+    },
+    {
+      "content": "333",
+      "isDone": false,
+      "id": "ZQD5Cht1DE0"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

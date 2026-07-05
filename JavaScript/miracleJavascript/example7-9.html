@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>무작위로 배경색 바꾸기</title>
+  </head>
+  <body>
+    <div id="color-list"></div>
+    <script>
+      const letter = '0123456789ABCDEF'; // 16진수 색상에 쓰이는 문자들 ex) #A1B2C3
+      let color = '#'; // 색상 문자열 시작값 여기에 랜덤문자 6개 붙여서 만들예정
+      let count = 1; // 몇 번 색을 바꿨는지 세는 카운터
+      // changeColor함수를 1초마다 반복실행하고, 반환된 intervalID는 멈출때 필요함
+      let intervalID = setInterval(changeColor, 1000);
+
+      function changeColor() {
+        // 먼저 1증가, 25번을 초과하면 setInterval 중지, 즉 최대 25번만 실행함
+        if (++count > 25) clearInterval(intervalID);
+
+        // 색상은 6자리니까 6번 반복
+        for (let k = 0; k < 6; k++)
+          // Math.random()*16은 0~ 15.999
+          // Mat.floor는 0~15 정수로 변환
+          // letter[숫자]는 랜덤문자 1개 , 그걸 color뒤에 붙일거임
+          // ex) # => #A => #A3 => #A3F...
+          color += letter[Math.floor(Math.random() * 16)];
+
+        // <div style='background-color:#A3F9C2'>#A3F9C2</div> 이런 형태임
+        document.write(
+          "<div style='background-color:" + color + "'>" + color + '</div>'
+        );
+
+        // 다음 색을 만들기 위해 초기화
+        color = '#';
+      }
+    </script>
+  </body>
+</html>

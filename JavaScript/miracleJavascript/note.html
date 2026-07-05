@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>무작위로 배경색 바꾸기 연습</title>
+  </head>
+  <body>
+    <!--색상 div들을 차곡차곡 쌓아 넣을 부고 공간 -->
+    <!--JS에서 여기로 접근해서 div를 추가함 -->
+    <div id="color-list"></div>
+
+    <script>
+      const letter = '0123456789ABCDEF';
+      let count = 0;
+
+      // <div id="color-list">를 JS에서 조작하기 위해 가져옴
+      // 앞으로 모든 결과는 여기에 추가됨
+      const colorList = document.getElementById('color-list');
+
+      // changeColor함수를 1초마다 실행함
+      // 멈출 수 있도록 ID를 변수에 저장
+      const intervalId = setInterval(changeColor, 1000);
+
+      // 1초마다 호출되는 함수
+      function changeColor() {
+        //먼저 1증가, 증가된 값이 25가 넘으면 종료
+        if (++count > 25) {
+          // 반복 실행 완전히 중단, 함수도 즉시 종료됨
+          clearInterval(intervalId);
+          return;
+        }
+
+        let color = '#';
+
+        // 색상은 항상 6자리, 그래서 정확히 6번 반복됨
+        for (let i = 0; i < 6; i++) {
+          // 랜덤숫자 0~15 생성, 그 숫자를 인덱스로 문자 하나 선택, color뒤에 하나씩 추가됨
+          color += letter[Math.floor(Math.random() * 16)];
+        }
+
+        // 기존 내용 유지하면서 +=, 새로운 div를 아래에 계속 추가
+        colorList.innerHTML += `
+        <div style="background-color:${color}">
+          ${color}</div>`;
+      }
+    </script>
+  </body>
+</html>

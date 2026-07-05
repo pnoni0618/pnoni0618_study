@@ -44,3 +44,12 @@ export const useAlertModal = () => {
   const store = useAlertModalStore();
   return store as typeof store & State;
 };
+
+
+
+// 내가 열심히 짜본 함수에요
+export const useAlertModal2 = () => {
+  // 여기에 개발 코드를 짰어요
+  const store = useAlertModalStore();
+  return store as typeof store & State;
+};

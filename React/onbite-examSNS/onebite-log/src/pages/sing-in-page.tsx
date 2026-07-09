@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Link } from "react-router";
 import gitHubLogo from "@/assets/github-mark.svg";
 import { toast } from "sonner";
@@ -32,7 +32,9 @@ export default function SignInPage() {
       },
     });
 
-  const handleSignInWithPasswordClick = () => {
+  const handleSignInSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
     if (email.trim() === "") return;
     if (password.trim() === "") return;
 
@@ -49,7 +51,7 @@ export default function SignInPage() {
   const isPending = isSignInWithPasswordPending || isSignInWithOAuth;
 
   return (
-    <div className="flex flex-col gap-8">
+    <form onSubmit={handleSignInSubmit} className="flex flex-col gap-8">
       <div className="text-xl font-bold">로그인</div>
       <div className="flex flex-col gap-2">
         <Input
@@ -70,14 +72,11 @@ export default function SignInPage() {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Button
-          disabled={isPending}
-          onClick={handleSignInWithPasswordClick}
-          className="w-full"
-        >
+        <Button type="submit" disabled={isPending} className="w-full">
           로그인
         </Button>
         <Button
+          type="button"
           disabled={isPending}
           onClick={handleSignInWithGitHubClick}
           className="w-full"
@@ -97,6 +96,6 @@ export default function SignInPage() {
           비밀번호를 잊으셨나요?
         </Link>
       </div>
-    </div>
+    </form>
   );
 }

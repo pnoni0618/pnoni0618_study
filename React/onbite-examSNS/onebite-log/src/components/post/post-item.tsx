@@ -45,7 +45,7 @@ export default function PostItem({
             <img
               src={post.author.avatar_url || defaultAvatar}
               alt={`${post.author.nickname}의 프로필 이미지`}
-              className="h-10 w-10"
+              className="h-10 w-10 rounded-full"
             />
           </Link>
 
@@ -91,7 +91,8 @@ export default function PostItem({
                 <div className="overflow-hidden rounded-xl">
                   <img
                     src={url}
-                    className="h-full max-h-[350px] w-full object-cover"
+                    alt="캐러셀 이미지"
+                    className="h-80 w-full object-cover"
                   />
                 </div>
               </CarouselItem>

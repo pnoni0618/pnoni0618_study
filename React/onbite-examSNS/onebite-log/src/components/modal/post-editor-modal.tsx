@@ -70,12 +70,23 @@ export default function PostEditorModal() {
     if (postEditorModal.type === "CREATE") {
       setContent("");
       setImages([]);
+      textareaRef.current?.focus();
     } else {
       setContent(postEditorModal.content);
       setImages([]);
-    }
 
-    textareaRef.current?.focus();
+      // 수정 모달일 때포커스를 맨 뒤로 보내주기
+      setTimeout(() => {
+        if (textareaRef.current) {
+          const textarea = textareaRef.current;
+          textarea.focus();
+
+          const length = postEditorModal.content?.length || 0;
+          textarea.setSelectionRange(length, length);
+        }
+      }, 0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postEditorModal.isOpen]);
 
   function handleCloseModal() {

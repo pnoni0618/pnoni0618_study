@@ -5,7 +5,7 @@ import { useSession } from "@/store/session";
 
 const PAGE_SIZE = 5;
 
-export function useInfinitePostsData(authorId?: string) {
+export function useInfinitePostsData(authorId?: string, stailTime = 0) {
   const queryClient = useQueryClient();
   const session = useSession();
 
@@ -35,6 +35,7 @@ export function useInfinitePostsData(authorId?: string) {
       return allPages.length;
     },
 
-    staleTime: Infinity,
+    staleTime: stailTime,
+    gcTime: stailTime === 0 ? 0 : 5 * 60 * 1000,
   });
 }

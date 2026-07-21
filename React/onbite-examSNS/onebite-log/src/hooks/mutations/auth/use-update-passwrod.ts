@@ -1,10 +1,10 @@
-import { unpdatePassword } from "@/api/auth";
+import { updatePassword } from "@/api/auth";
 import type { useMutationCallback } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 
 export function useUpdatePassword(callbacks?: useMutationCallback) {
   return useMutation({
-    mutationFn: unpdatePassword,
+    mutationFn: updatePassword,
     onSuccess: () => {
       if (callbacks?.onSuccess) callbacks?.onSuccess();
     },

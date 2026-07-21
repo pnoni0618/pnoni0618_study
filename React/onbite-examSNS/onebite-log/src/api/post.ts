@@ -1,6 +1,6 @@
 import supabase from "@/lib/supabase";
 import { uploadImage } from "./imges";
-import type { PostEntity } from "@/types";
+import type { Post, PostEntity } from "@/types";
 
 export async function fetchPosts({
   from,
@@ -12,10 +12,13 @@ export async function fetchPosts({
   to: number;
   userId: string;
   authorId?: string;
-}) {
+}) : Promise<Post[]> {
   const request = supabase
     .from("post")
-    .select("*, author: profile!author_id (*), myLiked: like!post_id (*)")
+    .select(
+      // [수정] "profithor_id" 오타 -> "profile!author_id" (post.author_id로 profile 테이블 조인)
+      "*, author: profile!author_id (*), myLiked: like!post_id (*), comment_count: comment(count)",
+    )
     .eq("like.user_id", userId)
     .order("created_at", { ascending: false })
     .range(from, to);
@@ -28,6 +31,9 @@ export async function fetchPosts({
   return data.map((post) => ({
     ...post,
     isLiked: post.myLiked && post.myLiked.length > 0,
+    // [수정] 존재하지 않던 count 변수 참조 -> comment(count) 조회 결과는
+    // [{ count: N }] 배열 형태로 오므로 post.comment_count[0].count로 숫자만 추출
+    comment_count: post.comment_count?.[0]?.count ?? 0,
   }));
 }
 
@@ -118,7 +124,10 @@ export async function fetchPostById({
 }) {
   const { data, error } = await supabase
     .from("post")
-    .select("*, author: profile!author_id (*), myLiked: like!post_id (*)")
+    .select(
+      // [추가] 상세 페이지에서도 댓글 수가 필요해서 comment_count 조회 추가 (원래 빠져있었음)
+      "*, author: profile!author_id (*), myLiked: like!post_id (*), comment_count: comment(count)",
+    )
     .eq("like.user_id", userId)
     .eq("id", postId)
     .single();
@@ -127,6 +136,8 @@ export async function fetchPostById({
   return {
     ...data,
     isLiked: data.myLiked && data.myLiked.length > 0,
+    // [추가] fetchPosts와 동일한 방식으로 댓글 수 숫자만 추출
+    comment_count: data.comment_count?.[0]?.count ?? 0,
   };
 }
 

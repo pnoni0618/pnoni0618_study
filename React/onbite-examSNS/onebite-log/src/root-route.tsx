@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
 import SignUpPage from "./pages/sign-up-page";
-import SignInPage from "./pages/sing-in-page";
+import SignInPage from "./pages/sign-in-page";
 import ForgetPasswordPage from "./pages/forget-password-page";
 import PostDetailPage from "./pages/post-detail-page";
 import ProfileDetailPage from "./pages/profile-detail-page";
@@ -31,4 +31,7 @@ export default function RootRoute() {
     </Routes>
   );
 }
-//확인2
+
+// 3단계 중첩상자 (Nested Routes)구조 _ 상자 안에 상자가 있고 그 안에 실제 페이지가 있는 형태
+// 가장 바깥 GlobalLayout _ 로그인 유무와 관계X, 기본 배경(네비게이션 바, 기본 레이아웃 배경)
+//

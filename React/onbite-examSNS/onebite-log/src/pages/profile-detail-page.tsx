@@ -11,7 +11,7 @@ export default function ProfileDetailPage() {
     window.scrollTo({
       top: 0,
     });
-  });
+  }, []);
 
   if (!userId) return <Navigate to={"/"} replace />;
 

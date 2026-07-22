@@ -15,6 +15,7 @@ import Fallback from "../fallback";
 import LikePostButton from "./like-post-button";
 import { Link } from "react-router";
 import Loader from "../loader";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 export default function PostItem({
   postId,
@@ -50,9 +51,12 @@ export default function PostItem({
           </Link>
 
           <div>
-            <div className="font-bold hover:underline">
-              {post.author.nickname}
-            </div>
+            <Link to={`/profile/${post.author_id}`}>
+              <div className="font-bold hover:underline">
+                {post.author.nickname}
+              </div>
+            </Link>
+
             <div className="text-muted-foreground text-sm">
               {formatTimeAgo(post.created_at)}
             </div>
@@ -85,16 +89,28 @@ export default function PostItem({
 
         {/* 2-2. 이미지 캐러셀 */}
         <Carousel>
-          <CarouselContent>
+          <CarouselContent className="-ml-4">
             {post.image_urls?.map((url, index) => (
-              <CarouselItem className={`basis-3/5`} key={index}>
-                <div className="overflow-hidden rounded-xl">
-                  <img
-                    src={url}
-                    alt="캐러셀 이미지"
-                    className="h-80 w-full object-cover"
-                  />
-                </div>
+              <CarouselItem className="basis-auto pl-4" key={index}>
+                {/* 각 이미지마다 독립된 확대 모달을 장착*/}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="cursor-pointer overflow-hidden rounded-xl transition hover:opacity-95">
+                      <img
+                        src={url}
+                        alt="캐러셀 이미지"
+                        className="h-80 w-auto"
+                      />
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="flex h-auto max-h-[80vh] w-[calc(100%-32px)] max-w-[500px] items-center justify-center border-none bg-transparent p-0 shadow-none outline-none [&>button]:text-white [&>button]:hover:text-gray-200">
+                    <img
+                      src={url}
+                      alt="원본 이미지 확대보기"
+                      className="h-full max-h-[80vh] w-full rounded-xl object-cover shadow-2xl"
+                    />
+                  </DialogContent>
+                </Dialog>
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -116,7 +132,8 @@ export default function PostItem({
           <Link to={`/post/${post.id}`}>
             <div className="hover:bg-muted flex cursor-pointer items-center gap-2 rounded-xl border-1 p-2 px-4 text-sm">
               <MessageCircle className="h-4 w-4" />
-              <span>댓글 달기</span>
+              {/* [수정] "댓글" 고정 텍스트 -> api/post.ts에서 새로 내려주는 comment_count 표시 (좋아요 버튼과 동일한 스타일) */}
+              <span>{post.comment_count}</span>
             </div>
           </Link>
         )}

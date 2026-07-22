@@ -18,7 +18,7 @@ export default function SignUpPage() {
     },
   });
 
-  const hadleSignUpClick = () => {
+  const handleSignUpClick = () => {
     if (email.trim() === "") return;
     if (password.trim() === "") return;
 
@@ -52,7 +52,7 @@ export default function SignUpPage() {
       <div>
         <Button
           disabled={isSignUpPending}
-          onClick={hadleSignUpClick}
+          onClick={handleSignUpClick}
           className="w-full"
         >
           회원가입

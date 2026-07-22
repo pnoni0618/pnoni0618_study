@@ -7,7 +7,8 @@ import Loader from "../loader";
 
 export default function PostFeed({ authorId }: { authorId?: string }) {
   const { data, error, isPending, fetchNextPage, isFetchingNextPage } =
-    useInfinitePostsData(authorId);
+    useInfinitePostsData(authorId, authorId ? 0 : Infinity);
+
   const { ref, inView } = useInView();
 
   useEffect(() => {

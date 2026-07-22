@@ -59,7 +59,7 @@ export async function requestPasswordResetEmail(email: string) {
   return data;
 }
 
-export async function unpdatePassword(password: string) {
+export async function updatePassword(password: string) {
   const { data, error } = await supabase.auth.updateUser({
     password,
   });

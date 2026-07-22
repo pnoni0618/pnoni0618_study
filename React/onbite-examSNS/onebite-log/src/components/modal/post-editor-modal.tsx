@@ -172,13 +172,14 @@ export default function PostEditorModal() {
 
         {postEditorModal.isOpen && postEditorModal.type === "EDIT" && (
           <Carousel>
-            <CarouselContent>
+            <CarouselContent className="-ml-4">
               {postEditorModal.imageUrls?.map((url) => (
-                <CarouselItem className="basis-2/5" key={url}>
-                  <div className="relative">
+                <CarouselItem className="basis-auto pl-4" key={url}>
+                  <div className="overfow-hidden relative rounded-xl">
                     <img
-                      className="h-full w-full rounded-sm object-cover"
+                      className="h-40 w-full rounded-sm object-cover"
                       src={url}
+                      alt="업로드 이미지 미리보기"
                     />
                   </div>
                 </CarouselItem>

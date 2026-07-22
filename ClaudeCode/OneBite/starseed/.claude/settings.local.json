@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/PNONI0~1/AppData/Local/Temp/claude/C--webdev-3-STARSEED/f9556542-3e2b-4a8c-b280-375d2cad90fc/scratchpad/shots/**)",
+      "Bash(node diag.mjs)",
+      "Bash(npx eslint *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)"
+    ]
+  }
+}

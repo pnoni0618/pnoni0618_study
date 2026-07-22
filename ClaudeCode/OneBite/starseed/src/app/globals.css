@@ -1,0 +1,381 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Design tokens — Starseed Origin
+   Deep space / nebula / aurora / gold-particle premium theme.
+----------------------------------------------------------------- */
+:root {
+  --deep-space: #050816;
+  --midnight: #080b24;
+  --midnight-2: #0c1030;
+  --cosmic-purple: #6d28d9;
+  --cosmic-purple-light: #a78bfa;
+  --indigo: #4338ca;
+  --indigo-light: #818cf8;
+  --gold: #f2c14e;
+  --gold-soft: #ffe9b8;
+  --gold-deep: #b3833d;
+  --aurora-teal: #2dd4bf;
+
+  --ink: #f6f5ff;
+  --ink-muted: #b9bbdc;
+  --ink-faint: #7d80a8;
+
+  --surface-glass: rgba(238, 236, 255, 0.045);
+  --surface-glass-strong: rgba(238, 236, 255, 0.09);
+  --surface-solid: #0d1130;
+  --border-glass: rgba(238, 236, 255, 0.1);
+  --border-glass-strong: rgba(238, 236, 255, 0.18);
+  --glow-gold: rgba(242, 193, 78, 0.35);
+  --glow-purple: rgba(167, 139, 250, 0.35);
+
+  /* categorical chart palette — validated: lightness band, chroma floor,
+     adjacent CVD >= 12, contrast >= 3:1 on #0b0f22 (dark mode) */
+  --chart-1: #b3833d;
+  --chart-2: #8b5cf6;
+  --chart-3: #0284c7;
+  --chart-4: #f43f5e;
+  --chart-5: #059669;
+}
+
+@theme inline {
+  --color-background: var(--deep-space);
+  --color-foreground: var(--ink);
+
+  --color-deep-space: var(--deep-space);
+  --color-midnight: var(--midnight);
+  --color-cosmic-purple: var(--cosmic-purple);
+  --color-cosmic-purple-light: var(--cosmic-purple-light);
+  --color-indigo: var(--indigo);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-aurora-teal: var(--aurora-teal);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --font-sans: var(--font-noto-sans-kr);
+  --font-serif: var(--font-noto-serif-kr);
+  --font-display: var(--font-cinzel);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--deep-space);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--deep-space);
+  color: var(--ink);
+  font-family: var(--font-noto-sans-kr), ui-sans-serif, system-ui, sans-serif;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+::selection {
+  background: var(--glow-gold);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------
+   Scrollbar — thin, cosmic
+----------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--deep-space);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--cosmic-purple), var(--indigo));
+  border-radius: 999px;
+  border: 2px solid var(--deep-space);
+}
+
+/* ---------------------------------------------------------------
+   Glass / surface primitives
+----------------------------------------------------------------- */
+.glass-panel {
+  background: var(--surface-glass);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+
+.glass-card {
+  background: linear-gradient(
+    160deg,
+    var(--surface-glass-strong),
+    var(--surface-glass)
+  );
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 20px 60px -30px rgba(0, 0, 0, 0.7);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-glass-strong);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 30px 70px -25px rgba(0, 0, 0, 0.8),
+    0 0 40px -12px var(--glow-purple);
+}
+
+/* ---------------------------------------------------------------
+   Text treatments
+----------------------------------------------------------------- */
+.text-gradient-gold {
+  background: linear-gradient(100deg, var(--gold-soft), var(--gold) 45%, var(--gold-deep) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-aurora {
+  background: linear-gradient(
+    100deg,
+    var(--cosmic-purple-light),
+    var(--indigo-light) 40%,
+    var(--aurora-teal) 75%,
+    var(--gold-soft)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aurora-shift 10s ease-in-out infinite;
+}
+
+.eyebrow {
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--gold-soft);
+}
+
+/* ---------------------------------------------------------------
+   Badges / pills
+----------------------------------------------------------------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: var(--surface-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------
+   Buttons
+----------------------------------------------------------------- */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-ripple .ripple {
+  position: absolute;
+  border-radius: 999px;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+  animation: ripple-expand 650ms ease-out forwards;
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--gold-soft), var(--gold) 55%, var(--gold-deep));
+  color: #241505;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
+    0 15px 40px -12px var(--glow-gold);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.5) inset,
+    0 20px 50px -10px var(--glow-gold);
+}
+
+.btn-secondary {
+  background: var(--surface-glass);
+  border: 1px solid var(--border-glass-strong);
+  color: var(--ink);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  background: var(--surface-glass-strong);
+  border-color: var(--glow-purple);
+}
+
+/* ---------------------------------------------------------------
+   Decorative backdrops
+----------------------------------------------------------------- */
+.nebula-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.star-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------
+   Reveal-on-scroll
+----------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------
+   Page transition (route fade)
+----------------------------------------------------------------- */
+.page-fade {
+  animation: page-fade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---------------------------------------------------------------
+   Keyframes
+----------------------------------------------------------------- */
+@keyframes ripple-expand {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes aurora-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blob-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(4%, 6%) scale(1.08);
+  }
+  66% {
+    transform: translate(-3%, -4%) scale(0.96);
+  }
+}
+
+@keyframes blob-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, 5%) scale(1.1);
+  }
+}
+
+@keyframes particle-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-140px) translateX(var(--drift, 20px));
+    opacity: 0;
+  }
+}
+
+@keyframes galaxy-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes galaxy-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes loader-fade-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

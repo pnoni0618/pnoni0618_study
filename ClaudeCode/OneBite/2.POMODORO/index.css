@@ -34,6 +34,14 @@ h1 {
   text-transform: lowercase;
 }
 
+.current-time {
+  font-size: 14px;
+  font-weight: 500;
+  color: #bdc3c7;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
 .time-display {
   font-size: 64px;
   font-weight: 700;

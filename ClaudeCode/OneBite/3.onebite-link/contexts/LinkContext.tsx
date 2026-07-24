@@ -4,10 +4,13 @@ import { createContext, useContext, useState } from "react";
 import { links as initialLinks } from "@/lib/links";
 import type { LinkItem } from "@/components/LinkCard";
 
+type LinkUpdate = Partial<Pick<LinkItem, "title" | "description" | "folderId">>;
+
 type LinkContextValue = {
   links: LinkItem[];
   addLink: (link: Omit<LinkItem, "id">) => void;
   deleteLink: (id: string) => void;
+  updateLink: (id: string, updates: LinkUpdate) => void;
 };
 
 const LinkContext = createContext<LinkContextValue | null>(null);
@@ -24,8 +27,14 @@ export function LinkProvider({ children }: { children: React.ReactNode }) {
     setLinks((prev) => prev.filter((link) => link.id !== id));
   };
 
+  const updateLink = (id: string, updates: LinkUpdate) => {
+    setLinks((prev) =>
+      prev.map((link) => (link.id === id ? { ...link, ...updates } : link)),
+    );
+  };
+
   return (
-    <LinkContext.Provider value={{ links, addLink, deleteLink }}>
+    <LinkContext.Provider value={{ links, addLink, deleteLink, updateLink }}>
       {children}
     </LinkContext.Provider>
   );

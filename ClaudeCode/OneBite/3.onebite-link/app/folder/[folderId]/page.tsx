@@ -1,22 +1,16 @@
-import { notFound } from "next/navigation";
+"use client";
+
+import { useParams } from "next/navigation";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import LinkGrid from "@/components/LinkGrid";
-import { folders } from "@/lib/folders";
+import { useFolders } from "@/contexts/FolderContext";
 import { links } from "@/lib/links";
 
-export default async function FolderPage({
-  params,
-}: {
-  params: Promise<{ folderId: string }>;
-}) {
-  const { folderId } = await params;
+export default function FolderPage() {
+  const { folderId } = useParams<{ folderId: string }>();
+  const { folders } = useFolders();
   const folder = folders.find((item) => item.id === folderId);
-
-  if (!folder) {
-    notFound();
-  }
-
   const folderLinks = links.filter((link) => link.folderId === folderId);
 
   return (
@@ -25,7 +19,13 @@ export default async function FolderPage({
       <div className="flex flex-1">
         <Sidebar />
         <main className="flex-1 p-6">
-          <LinkGrid links={folderLinks} />
+          {folder ? (
+            <LinkGrid links={folderLinks} />
+          ) : (
+            <div className="flex flex-1 items-center justify-center text-sm text-zinc-400">
+              폴더를 찾을 수 없습니다.
+            </div>
+          )}
         </main>
       </div>
     </div>

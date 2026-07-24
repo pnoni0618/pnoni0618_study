@@ -1,15 +1,61 @@
 "use client";
 
 import { useState } from "react";
-import { folders } from "@/lib/folders";
+import { useRouter } from "next/navigation";
+import { useFolders } from "@/contexts/FolderContext";
+import { useLinks } from "@/contexts/LinkContext";
+
+type OgResponse = {
+  url: string;
+  title: string;
+  description: string;
+  thumbnailUrl?: string;
+  error?: string;
+};
 
 export default function NewLinkForm() {
+  const router = useRouter();
+  const { folders } = useFolders();
+  const { addLink } = useLinks();
   const [url, setUrl] = useState("");
   const [folderId, setFolderId] = useState(folders[0]?.id ?? "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // TODO: 링크 저장 API 연동
+    if (!folderId) {
+      setError("먼저 폴더를 만들어주세요.");
+      return;
+    }
+
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(`/api/og?url=${encodeURIComponent(url)}`);
+      const data: OgResponse = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error ?? "링크 정보를 가져오지 못했습니다.");
+      }
+
+      addLink({
+        title: data.title || url,
+        url: data.url,
+        description: data.description,
+        thumbnailUrl: data.thumbnailUrl,
+        folderId,
+      });
+
+      router.push("/");
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "링크 정보를 가져오지 못했습니다.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -56,11 +102,16 @@ export default function NewLinkForm() {
         </select>
       </div>
 
+      {error && (
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+      )}
+
       <button
         type="submit"
-        className="mt-2 rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+        disabled={isSubmitting}
+        className="mt-2 rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-60 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
       >
-        저장
+        {isSubmitting ? "확인 중..." : "확인"}
       </button>
     </form>
   );

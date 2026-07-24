@@ -5,11 +5,12 @@ import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import LinkGrid from "@/components/LinkGrid";
 import { useFolders } from "@/contexts/FolderContext";
-import { links } from "@/lib/links";
+import { useLinks } from "@/contexts/LinkContext";
 
 export default function FolderPage() {
   const { folderId } = useParams<{ folderId: string }>();
   const { folders } = useFolders();
+  const { links } = useLinks();
   const folder = folders.find((item) => item.id === folderId);
   const folderLinks = links.filter((link) => link.folderId === folderId);
 

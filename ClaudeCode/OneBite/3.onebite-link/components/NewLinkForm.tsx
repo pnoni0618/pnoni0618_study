@@ -7,7 +7,7 @@ export default function NewLinkForm() {
   const [url, setUrl] = useState("");
   const [folderId, setFolderId] = useState(folders[0]?.id ?? "");
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     // TODO: 링크 저장 API 연동
   };

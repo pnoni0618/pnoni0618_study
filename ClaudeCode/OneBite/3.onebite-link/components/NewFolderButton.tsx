@@ -13,7 +13,7 @@ export default function NewFolderButton() {
     setName("");
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) return;

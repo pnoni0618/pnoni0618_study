@@ -9,7 +9,7 @@ type LinkUpdate = Partial<Pick<LinkItem, "title" | "description" | "folderId">>;
 type LinkContextValue = {
   links: LinkItem[];
   addLink: (link: Omit<LinkItem, "id">) => Promise<void>;
-  deleteLink: (id: string) => void;
+  deleteLink: (id: string) => Promise<void>;
   updateLink: (id: string, updates: LinkUpdate) => Promise<void>;
 };
 
@@ -70,7 +70,14 @@ export function LinkProvider({ children }: { children: React.ReactNode }) {
     setLinks((prev) => [...prev, newLink]);
   };
 
-  const deleteLink = (id: string) => {
+  const deleteLink = async (id: string) => {
+    const supabase = createClient();
+    const { error } = await supabase.from("links").delete().eq("id", id);
+
+    if (error) {
+      throw error;
+    }
+
     setLinks((prev) => prev.filter((link) => link.id !== id));
   };
 

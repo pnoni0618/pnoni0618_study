@@ -29,6 +29,7 @@ export default function LinkCard({
   const [editDescription, setEditDescription] = useState(description);
   const [editFolderId, setEditFolderId] = useState(folderId);
   const [editError, setEditError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
 
   const openEditModal = () => {
     setEditTitle(title);
@@ -55,6 +56,16 @@ export default function LinkCard({
       closeEditModal();
     } catch {
       setEditError("링크를 수정하지 못했습니다.");
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    setDeleteError("");
+    try {
+      await deleteLink(id);
+      setIsConfirmOpen(false);
+    } catch {
+      setDeleteError("링크를 삭제하지 못했습니다.");
     }
   };
 
@@ -146,20 +157,25 @@ export default function LinkCard({
             <p className="mb-6 text-sm text-zinc-600 dark:text-zinc-400">
               &apos;{title}&apos; 링크를 삭제하시겠습니까?
             </p>
+            {deleteError && (
+              <p className="mb-4 text-sm text-red-600 dark:text-red-400">
+                {deleteError}
+              </p>
+            )}
             <div className="flex justify-end gap-2">
               <button
                 type="button"
-                onClick={() => setIsConfirmOpen(false)}
+                onClick={() => {
+                  setIsConfirmOpen(false);
+                  setDeleteError("");
+                }}
                 className="rounded-full border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-800"
               >
                 취소
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  deleteLink(id);
-                  setIsConfirmOpen(false);
-                }}
+                onClick={handleConfirmDelete}
                 className="rounded-full bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700"
               >
                 삭제

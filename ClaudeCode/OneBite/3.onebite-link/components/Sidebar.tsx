@@ -14,16 +14,25 @@ export default function Sidebar() {
   const [editTarget, setEditTarget] = useState<Folder | null>(null);
   const [editName, setEditName] = useState("");
   const [editError, setEditError] = useState("");
+  const [deleteError, setDeleteError] = useState("");
 
-  const closeDeleteModal = () => setDeleteTarget(null);
+  const closeDeleteModal = () => {
+    setDeleteTarget(null);
+    setDeleteError("");
+  };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     if (!deleteTarget) return;
-    deleteFolder(deleteTarget.id);
-    if (pathname === `/folder/${deleteTarget.id}`) {
-      router.push("/");
+    setDeleteError("");
+    try {
+      await deleteFolder(deleteTarget.id);
+      if (pathname === `/folder/${deleteTarget.id}`) {
+        router.push("/");
+      }
+      closeDeleteModal();
+    } catch {
+      setDeleteError("폴더를 삭제하지 못했습니다.");
     }
-    closeDeleteModal();
   };
 
   const openEditModal = (folder: Folder) => {
@@ -140,6 +149,11 @@ export default function Sidebar() {
             <p className="mb-6 text-sm text-zinc-600 dark:text-zinc-400">
               &apos;{deleteTarget.name}&apos; 폴더를 삭제하시겠습니까?
             </p>
+            {deleteError && (
+              <p className="mb-4 text-sm text-red-600 dark:text-red-400">
+                {deleteError}
+              </p>
+            )}
             <div className="flex justify-end gap-2">
               <button
                 type="button"

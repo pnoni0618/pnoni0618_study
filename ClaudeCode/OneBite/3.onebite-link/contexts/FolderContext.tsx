@@ -7,7 +7,7 @@ import type { Folder } from "@/lib/folders";
 type FolderContextValue = {
   folders: Folder[];
   addFolder: (name: string) => Promise<void>;
-  deleteFolder: (id: string) => void;
+  deleteFolder: (id: string) => Promise<void>;
   renameFolder: (id: string, name: string) => Promise<void>;
 };
 
@@ -48,7 +48,14 @@ export function FolderProvider({ children }: { children: React.ReactNode }) {
     setFolders((prev) => [...prev, newFolder]);
   };
 
-  const deleteFolder = (id: string) => {
+  const deleteFolder = async (id: string) => {
+    const supabase = createClient();
+    const { error } = await supabase.from("folders").delete().eq("id", id);
+
+    if (error) {
+      throw error;
+    }
+
     setFolders((prev) => prev.filter((folder) => folder.id !== id));
   };
 

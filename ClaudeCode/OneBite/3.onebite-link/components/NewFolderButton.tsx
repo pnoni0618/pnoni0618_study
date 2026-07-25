@@ -6,19 +6,32 @@ import { useFolders } from "@/contexts/FolderContext";
 export default function NewFolderButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const { addFolder } = useFolders();
 
   const closeModal = () => {
     setIsOpen(false);
     setName("");
+    setError("");
   };
 
-  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmitting) return;
     const trimmed = name.trim();
     if (!trimmed) return;
-    addFolder(trimmed);
-    closeModal();
+
+    setIsSubmitting(true);
+    setError("");
+    try {
+      await addFolder(trimmed);
+      closeModal();
+    } catch {
+      setError("폴더를 추가하지 못했습니다.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -57,6 +70,10 @@ export default function NewFolderButton() {
                 />
               </div>
 
+              {error && (
+                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+              )}
+
               <div className="flex justify-end gap-2">
                 <button
                   type="button"
@@ -67,9 +84,10 @@ export default function NewFolderButton() {
                 </button>
                 <button
                   type="submit"
-                  className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                  disabled={isSubmitting}
+                  className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-60 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
                 >
-                  저장
+                  {isSubmitting ? "저장 중..." : "저장"}
                 </button>
               </div>
             </form>

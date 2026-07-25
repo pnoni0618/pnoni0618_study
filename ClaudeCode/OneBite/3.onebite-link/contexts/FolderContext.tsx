@@ -1,11 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
-import { folders as initialFolders, type Folder } from "@/lib/folders";
+import { createContext, useContext, useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import type { Folder } from "@/lib/folders";
 
 type FolderContextValue = {
   folders: Folder[];
-  addFolder: (name: string) => void;
+  addFolder: (name: string) => Promise<void>;
   deleteFolder: (id: string) => void;
   renameFolder: (id: string, name: string) => void;
 };
@@ -13,10 +14,37 @@ type FolderContextValue = {
 const FolderContext = createContext<FolderContextValue | null>(null);
 
 export function FolderProvider({ children }: { children: React.ReactNode }) {
-  const [folders, setFolders] = useState<Folder[]>(initialFolders);
+  const [folders, setFolders] = useState<Folder[]>([]);
 
-  const addFolder = (name: string) => {
-    const newFolder: Folder = { id: crypto.randomUUID(), name };
+  useEffect(() => {
+    const supabase = createClient();
+
+    supabase
+      .from("folders")
+      .select("id, name")
+      .order("id", { ascending: true })
+      .then(({ data }) => {
+        if (data) {
+          setFolders(
+            data.map((folder) => ({ id: String(folder.id), name: folder.name })),
+          );
+        }
+      });
+  }, []);
+
+  const addFolder = async (name: string) => {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("folders")
+      .insert({ name })
+      .select("id, name")
+      .single();
+
+    if (error || !data) {
+      throw error ?? new Error("폴더를 추가하지 못했습니다.");
+    }
+
+    const newFolder: Folder = { id: String(data.id), name: data.name };
     setFolders((prev) => [...prev, newFolder]);
   };
 

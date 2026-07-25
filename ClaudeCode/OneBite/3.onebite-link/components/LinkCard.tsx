@@ -28,26 +28,34 @@ export default function LinkCard({
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
   const [editFolderId, setEditFolderId] = useState(folderId);
+  const [editError, setEditError] = useState("");
 
   const openEditModal = () => {
     setEditTitle(title);
     setEditDescription(description);
     setEditFolderId(folderId);
+    setEditError("");
     setIsEditOpen(true);
   };
 
   const closeEditModal = () => setIsEditOpen(false);
 
-  const handleEditSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handleEditSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmedTitle = editTitle.trim();
     if (!trimmedTitle) return;
-    updateLink(id, {
-      title: trimmedTitle,
-      description: editDescription.trim(),
-      folderId: editFolderId,
-    });
-    closeEditModal();
+
+    setEditError("");
+    try {
+      await updateLink(id, {
+        title: trimmedTitle,
+        description: editDescription.trim(),
+        folderId: editFolderId,
+      });
+      closeEditModal();
+    } catch {
+      setEditError("링크를 수정하지 못했습니다.");
+    }
   };
 
   return (
@@ -221,6 +229,12 @@ export default function LinkCard({
                   className="resize-none rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
                 />
               </div>
+
+              {editError && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  {editError}
+                </p>
+              )}
 
               <div className="flex justify-end gap-2">
                 <button

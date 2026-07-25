@@ -10,7 +10,7 @@ type LinkContextValue = {
   links: LinkItem[];
   addLink: (link: Omit<LinkItem, "id">) => Promise<void>;
   deleteLink: (id: string) => void;
-  updateLink: (id: string, updates: LinkUpdate) => void;
+  updateLink: (id: string, updates: LinkUpdate) => Promise<void>;
 };
 
 const LinkContext = createContext<LinkContextValue | null>(null);
@@ -74,7 +74,21 @@ export function LinkProvider({ children }: { children: React.ReactNode }) {
     setLinks((prev) => prev.filter((link) => link.id !== id));
   };
 
-  const updateLink = (id: string, updates: LinkUpdate) => {
+  const updateLink = async (id: string, updates: LinkUpdate) => {
+    const supabase = createClient();
+    const payload: { title?: string; description?: string; folder_id?: number | null } = {};
+    if (updates.title !== undefined) payload.title = updates.title;
+    if (updates.description !== undefined) payload.description = updates.description;
+    if (updates.folderId !== undefined) {
+      payload.folder_id = updates.folderId ? Number(updates.folderId) : null;
+    }
+
+    const { error } = await supabase.from("links").update(payload).eq("id", id);
+
+    if (error) {
+      throw error;
+    }
+
     setLinks((prev) =>
       prev.map((link) => (link.id === id ? { ...link, ...updates } : link)),
     );

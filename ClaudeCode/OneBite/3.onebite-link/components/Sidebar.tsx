@@ -13,6 +13,7 @@ export default function Sidebar() {
   const [deleteTarget, setDeleteTarget] = useState<Folder | null>(null);
   const [editTarget, setEditTarget] = useState<Folder | null>(null);
   const [editName, setEditName] = useState("");
+  const [editError, setEditError] = useState("");
 
   const closeDeleteModal = () => setDeleteTarget(null);
 
@@ -33,15 +34,22 @@ export default function Sidebar() {
   const closeEditModal = () => {
     setEditTarget(null);
     setEditName("");
+    setEditError("");
   };
 
-  const handleEditSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handleEditSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!editTarget) return;
     const trimmed = editName.trim();
     if (!trimmed) return;
-    renameFolder(editTarget.id, trimmed);
-    closeEditModal();
+
+    setEditError("");
+    try {
+      await renameFolder(editTarget.id, trimmed);
+      closeEditModal();
+    } catch {
+      setEditError("폴더 이름을 수정하지 못했습니다.");
+    }
   };
 
   return (
@@ -177,6 +185,12 @@ export default function Sidebar() {
                   className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
                 />
               </div>
+
+              {editError && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  {editError}
+                </p>
+              )}
 
               <div className="flex justify-end gap-2">
                 <button

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useFolders } from "@/contexts/FolderContext";
+import { createClient } from "@/utils/supabase/client";
 import type { Folder } from "@/lib/folders";
 
 export default function Sidebar() {
@@ -15,6 +16,12 @@ export default function Sidebar() {
   const [editName, setEditName] = useState("");
   const [editError, setEditError] = useState("");
   const [deleteError, setDeleteError] = useState("");
+
+  const handleLogout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
 
   const closeDeleteModal = () => {
     setDeleteTarget(null);
@@ -139,6 +146,28 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="mt-auto flex items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="h-4 w-4"
+        >
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <path d="M16 17l5-5-5-5" />
+          <path d="M21 12H9" />
+        </svg>
+        로그아웃
+      </button>
 
       {deleteTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">

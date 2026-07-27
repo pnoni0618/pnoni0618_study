@@ -20,25 +20,44 @@ export function LinkProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const supabase = createClient();
+    let currentUserId: string | null = null;
 
-    supabase
-      .from("links")
-      .select("id, url, title, description, thumbnail_url, folder_id")
-      .order("id", { ascending: true })
-      .then(({ data }) => {
-        if (data) {
-          setLinks(
-            data.map((link) => ({
-              id: String(link.id),
-              title: link.title ?? "",
-              url: link.url,
-              description: link.description ?? "",
-              thumbnailUrl: link.thumbnail_url ?? undefined,
-              folderId: link.folder_id !== null ? String(link.folder_id) : "",
-            })),
-          );
-        }
-      });
+    const fetchLinks = async (userId: string | null) => {
+      if (!userId) {
+        setLinks([]);
+        return;
+      }
+
+      const { data } = await supabase
+        .from("links")
+        .select("id, url, title, description, thumbnail_url, folder_id")
+        .eq("user_id", userId)
+        .order("id", { ascending: true });
+
+      if (data) {
+        setLinks(
+          data.map((link) => ({
+            id: String(link.id),
+            title: link.title ?? "",
+            url: link.url,
+            description: link.description ?? "",
+            thumbnailUrl: link.thumbnail_url ?? undefined,
+            folderId: link.folder_id !== null ? String(link.folder_id) : "",
+          })),
+        );
+      }
+    };
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      const userId = session?.user?.id ?? null;
+      if (userId === currentUserId) return;
+      currentUserId = userId;
+      fetchLinks(userId);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const addLink = async (link: Omit<LinkItem, "id">) => {

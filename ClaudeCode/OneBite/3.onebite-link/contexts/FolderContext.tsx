@@ -18,18 +18,37 @@ export function FolderProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const supabase = createClient();
+    let currentUserId: string | null = null;
 
-    supabase
-      .from("folders")
-      .select("id, name")
-      .order("id", { ascending: true })
-      .then(({ data }) => {
-        if (data) {
-          setFolders(
-            data.map((folder) => ({ id: String(folder.id), name: folder.name })),
-          );
-        }
-      });
+    const fetchFolders = async (userId: string | null) => {
+      if (!userId) {
+        setFolders([]);
+        return;
+      }
+
+      const { data } = await supabase
+        .from("folders")
+        .select("id, name")
+        .eq("user_id", userId)
+        .order("id", { ascending: true });
+
+      if (data) {
+        setFolders(
+          data.map((folder) => ({ id: String(folder.id), name: folder.name })),
+        );
+      }
+    };
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      const userId = session?.user?.id ?? null;
+      if (userId === currentUserId) return;
+      currentUserId = userId;
+      fetchFolders(userId);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const addFolder = async (name: string) => {

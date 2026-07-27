@@ -4,6 +4,9 @@ import { type NextRequest, NextResponse } from "next/server";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
+const isProtectedPath = (pathname: string) =>
+  pathname === "/" || pathname === "/new" || pathname.startsWith("/folder/");
+
 export const updateSession = async (request: NextRequest) => {
   // Create an unmodified response
   let supabaseResponse = NextResponse.next({
@@ -33,7 +36,13 @@ export const updateSession = async (request: NextRequest) => {
 
   // Refresh the auth token if needed - required so Server Components
   // see an up-to-date session.
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user && isProtectedPath(request.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   return supabaseResponse;
 };

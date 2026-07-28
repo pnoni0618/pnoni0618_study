@@ -169,6 +169,13 @@ export default function Sidebar() {
         로그아웃
       </button>
 
+      <Link
+        href="/privacy"
+        className="rounded-lg px-3 py-2 text-left text-sm text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-500 dark:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-500"
+      >
+        개인정보 처리방침
+      </Link>
+
       {deleteTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="w-full max-w-sm rounded-xl bg-white p-6 shadow-lg dark:bg-zinc-900">

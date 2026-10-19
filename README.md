@@ -5,7 +5,7 @@
 ## ⭐ 대표 프로젝트
 | 프로젝트 | 설명 |
 |---|---|
-| [yezak](https://github.com/cbj0605/yezak) | 예작음악콩쿠르 웹사이트 (Next.js, Strapi 등) |
+| [yezak](https://github.com/cbj0605/yezak) | 예작음악콩쿠르 웹사이트 — 프론트엔드 개발자로 운영·유지보수 담당 |
 | [claude-code-onebite](https://github.com/pnoni0618/claude-code-onebite) | Claude Code 강의(이정환) 실습: 뽀모도로, 링크 저장 서비스(카카오 로그인) |
 | [gym_coding](https://github.com/pnoni0618/gym_coding) | Claude Code 강의(gymCoding) 실습: Next.js 스타터킷, 자동 블로그 발행 |
 

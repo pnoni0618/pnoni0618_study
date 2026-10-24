@@ -1,4 +1,5 @@
-import ClientComponent from "@/app/component/client-component";
+import BookItem from "@/components/book-item";
+import books from "@/mock/books.json";
 
 export default async function Page({
   searchParams,
@@ -8,10 +9,9 @@ export default async function Page({
   const { q } = await searchParams;
   return (
     <div>
-      Search 페이지 {q}
-      <ClientComponent>
-        <></>
-      </ClientComponent>
+      {books.map((book) => (
+        <BookItem key={book.id} {...book} />
+      ))}
     </div>
   );
 }

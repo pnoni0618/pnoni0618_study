@@ -1,6 +1,7 @@
 import Link from "next/link";
 import style from "./layout.module.css";
 import { BookData } from "@/types";
+import "react-loading-skeleton/dist/skeleton.css";
 
 async function Footer() {
   const response = await fetch(

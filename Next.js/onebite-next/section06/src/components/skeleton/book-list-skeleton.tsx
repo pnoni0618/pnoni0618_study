@@ -8,8 +8,10 @@ export default function BookListSkeleton({ count }: { count: number }) {
 
   return (
     <>
-      <SkeletonTheme baseColor="#2d3748" highlightColor="#4fd1c5">
-        v
+      <SkeletonTheme baseColor="#d7e1f4" highlightColor="#adbff7">
+        {new Array(count).fill(0).map((_, idx) => (
+          <BookItemSkeleton key={`book-item-skeleton-${idx}`} />
+        ))}
       </SkeletonTheme>
     </>
   );

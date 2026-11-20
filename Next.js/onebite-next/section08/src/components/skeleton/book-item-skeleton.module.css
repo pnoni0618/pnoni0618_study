@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  gap: 15px;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  align-items: center;
+}
+
+.cover_img {
+  flex-shrink: 0;
+}
+
+.info_container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
